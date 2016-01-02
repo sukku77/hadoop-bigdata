@@ -7,3 +7,5 @@ customers_grouped = group customers all;
 customers_count = foreach customers_grouped generate COUNT(customers);
 
 dump customers_count;
+
+
