@@ -33,6 +33,7 @@ loading data into partitioned table from staging table
 ------------------------------------------------------
 insert overwrite table test partition(id=1) select name,sal from test_staging where id=1;
 alter table test add partition(id=2) location '/user/cloudera/2';
+insert overwrite table test partition(id) select name,sal,id from test_staging;
 
 
 sampling

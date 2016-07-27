@@ -27,6 +27,6 @@ import org.apache.hadoop.io.Text;
 	    }
 	}
 
-// add jar /home/cloudera/.jar
-//create temporary function to_upper as 'com.snowplowanalytics.hive.udf.ToUpper';
+//add jar /home/cloudera/.jar
+//create temporary function to_upper as 'com.alg.hive.ToUpper';
 //SELECT toupper(author_name) FROM authors a;
