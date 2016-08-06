@@ -1,0 +1,38 @@
+package com.MR;
+
+import java.io.IOException;
+
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Reducer;
+
+public class BigramFrequencyReducer extends Reducer<Text,IntWritable,Text,IntWritable>{
+
+	private static int max =0;
+	private static Text word = new Text();
+	
+	@Override
+	protected void cleanup(
+			Reducer<Text, IntWritable, Text, IntWritable>.Context context)
+			throws IOException, InterruptedException {
+		System.out.println("clieanup method");
+		context.write(word, new IntWritable(max));
+		super.cleanup(context);
+	}
+	
+	@Override
+	protected void reduce(Text arg0 , Iterable<IntWritable> arg1,
+			Reducer<Text, IntWritable, Text, IntWritable>.Context arg2)
+			throws IOException, InterruptedException {
+		int sum =0 ;
+		for (IntWritable intWritable : arg1) {
+			sum = sum + 1;		
+		}
+		//Assign max value to sum and take that words as highest frequency bigram
+		if(sum > max){
+			max = sum;
+			word.set(arg0);
+		}
+		//arg2.write(arg0,new IntWritable(sum));
+	}
+}
